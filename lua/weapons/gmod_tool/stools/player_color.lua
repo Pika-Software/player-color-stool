@@ -3,9 +3,6 @@ local color_white = color_white
 local IsValid = IsValid
 local SERVER = SERVER
 local Color = Color
-local gpm = gpm
-
-gpm.Import( gpm.LocatePackage( "packages/player-extensions", "https://github.com/Pika-Software/player-extensions" ), true )
 
 TOOL.Name = "#tool.player_color.name"
 TOOL.Category = "Render"
@@ -24,7 +21,8 @@ end
 if SERVER then
 	function TOOL:SetEntityColor( entity, color )
 		if not IsValid( entity ) then return end
-		gpm.ArgAssert( color, 2, "Color" )
+		if not IsColor( color ) then return end
+		if type( entity.SetPlayerColor ) ~= "function" then return end
 
 		entity:SetPlayerColor( color:ToVector() )
 		duplicator.StoreEntityModifier( entity, "player_color", color )
