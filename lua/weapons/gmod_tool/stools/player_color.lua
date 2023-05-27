@@ -37,12 +37,15 @@ end
 
 function TOOL:SetupColor( trace, color )
 	local entity = trace.Entity
-	if IsValid( entity.AttachedEntity ) then
-		entity = entity.AttachedEntity
-	end
-
 	if not IsValid( entity ) then
 		return false
+	end
+
+	if entity:GetClass() == "prop_effect" then
+		local attachedEntity = entity.AttachedEntity
+		if IsValid( attachedEntity ) then
+			entity = attachedEntity
+		end
 	end
 
 	if SERVER then
@@ -62,12 +65,18 @@ end
 
 function TOOL:RightClick( trace )
 	local entity = trace.Entity
+	if not IsValid( entity ) then
+		return false
+	end
+
 	if IsValid( entity.AttachedEntity ) then
 		entity = entity.AttachedEntity
 	end
 
 	local ply = self:GetOwner()
-	if not IsValid( ply ) then return false end
+	if not IsValid( ply ) then
+		return false
+	end
 
 	local color = entity:GetPlayerColor()
 	if not color then return false end
