@@ -13,9 +13,23 @@ for _, str in ipairs( TOOL.RGB ) do
 end
 
 if CLIENT then
+	TOOL.Information = {
+		{
+			["name"] = "left"
+		},
+		{
+			["name"] = "right"
+		},
+		{
+			["name"] = "reload"
+		}
+	}
+
 	language.Add( "tool.player_color.name", "Player Color" )
 	language.Add( "tool.player_color.desc", "Set a selected color like player color to ragdolls and other entities." )
-	language.Add( "tool.player_color.0", "Left Mouse: set current color; Right Mouse: copy color; Reload: reset color." )
+	language.Add( "tool.player_color.left", "Set current color to entity" )
+	language.Add( "tool.player_color.right", "Copy color from entity" )
+	language.Add( "tool.player_color.reload", "Reset entity color to white" )
 end
 
 if SERVER then
