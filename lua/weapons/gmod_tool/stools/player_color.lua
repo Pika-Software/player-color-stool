@@ -33,6 +33,7 @@ if CLIENT then
 end
 
 if SERVER then
+
 	function TOOL:SetEntityColor( entity, color )
 		if not IsValid( entity ) then return end
 		if not IsColor( color ) then return end
@@ -45,6 +46,7 @@ if SERVER then
 	duplicator.RegisterEntityModifier( "player_color", function( _, entity, data )
 		TOOL.SetEntityColor( nil, entity, Color( data.r, data.g, data.b ) )
 	end )
+
 end
 
 function TOOL:SetupColor( trace, color )
